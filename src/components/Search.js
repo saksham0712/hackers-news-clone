@@ -29,7 +29,7 @@ const Search = ({ onSearch }) => {
         />
         <h1 className="hidden sm:block text-xl">Search Hacker News</h1>
       </div>
-      <form className="m-2 w-full md:w-4/5">
+      <div className="m-2 w-full md:w-4/5">
         <input
           type="text"
           value={query}
@@ -37,7 +37,7 @@ const Search = ({ onSearch }) => {
           placeholder="Search Hacker News"
           className="p-2 border-none w-full"
         />
-      </form>
+      </div>
     </div>
   );
 };

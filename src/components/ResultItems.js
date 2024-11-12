@@ -35,7 +35,7 @@ const ResultItem = ({
 
   return (
 
-      <div className="flex flex-col px-4 overflowx-hidden">
+      <div className="flex flex-col px-4 overflow-x-hidden">
         <a
           href={url}
           target="_blank"
