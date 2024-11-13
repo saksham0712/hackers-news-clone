@@ -12,10 +12,24 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
+  const [timeFilter, setTimeFilter] = useState("");
   const [page, setPage] = useState(0);
   const [totalpage, setTotalpage] = useState(0);
   const [user, setUser] = useState();
 
+  const getTimeFilter = (timeFilter) => {
+    const now = Date.now();
+    switch (timeFilter) {
+      case "last24hours":
+        return `created_at_i>${now - 24 * 60 * 60 * 1000}`; // 24 hours ago
+      case "last7days":
+        return `created_at_i>${now - 7 * 24 * 60 * 60 * 1000}`; // 7 days ago
+      case "last30days":
+        return `created_at_i>${now - 30 * 24 * 60 * 60 * 1000}`; // 30 days ago
+      default:
+        return ""; // No time filter
+    }
+  };
   // Check if the user is logged in
   useEffect(() => {
     const loggedInUser = localStorage.getItem("username");
@@ -28,8 +42,11 @@ const App = () => {
   const searchHackerNews = async (query, page) => {
     setLoading(true);
     const categoryFilter = category ? `&tags=${category}` : "";
+    const timeFilterParam = getTimeFilter(timeFilter)
+      ? `&numericFilters=${getTimeFilter(timeFilter)}`
+      : "";
     const response = await fetch(
-      `https://hn.algolia.com/api/v1/search?query=${query}${categoryFilter}&page=${page}&hitsPerPage=20`
+      `https://hn.algolia.com/api/v1/search?query=${query}${categoryFilter}${timeFilterParam}&page=${page}&hitsPerPage=20`
     );
     const data = await response.json();
     console.log("this is the data", data);
@@ -43,7 +60,7 @@ const App = () => {
 
   useEffect(() => {
     searchHackerNews(query, page);
-  }, [query, category, page]);
+  }, [query, category, timeFilter, page]);
 
   // Search handler from the Search component
   const handleSearch = (query) => {
@@ -58,7 +75,7 @@ const App = () => {
 
         {/* Loading or Results info */}
         <div className="my-2 flex justify-between">
-          <div>
+          <div className="flex align-ceter items-center">
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -71,8 +88,19 @@ const App = () => {
               <option value="ask_hn">Ask HN</option>
               <option value="show_hn">Show HN</option>
             </select>
+            <p>for</p>
+            <select
+              value={timeFilter}
+              onChange={(e) => setTimeFilter(e.target.value)}
+              className="mx-2 p-2 border rounded"
+            >
+              <option value="">All Time</option>
+              <option value="last24hours">Last 24 hours</option>
+              <option value="last7days">Last 7 days</option>
+              <option value="last30days">Last 30 days</option>
+            </select>
           </div>
-        {loading && <p className="text-center">Loading...</p>}
+          {loading && <p className="text-center">Loading...</p>}
           <p className="text-sm mx-2">
             {totalResults} results ({processTime} seconds)
           </p>
