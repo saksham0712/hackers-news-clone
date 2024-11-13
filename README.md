@@ -1,70 +1,156 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Hacker News Clone - Login & Registration
 
-## Available Scripts
+This project is a simple web application that allows users to register, log in, and view search results from Hacker News using React and localStorage for state persistence. The project also implements basic routing with `react-router-dom` for navigating between pages.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Registration**: Users can register with a username and password.
+- **Login**: Registered users can log in with their username and password.
+- **Search Hacker News**: Users can search for articles from Hacker News using the Algolia API.
+- **Home Page**: After logging in, users are redirected to a home page where they can view their username.
+- **LocalStorage**: Authentication data is stored in `localStorage` to persist login state.
+- **React Router**: The app uses `react-router-dom` for page navigation.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend**: React.js
+- **Styling**: Tailwind CSS
+- **State Management**: React hooks (`useState`, `useEffect`)
+- **Routing**: `react-router-dom`
+- **Storage**: `localStorage` for authentication persistence
 
-### `npm test`
+## Demo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Link of Website Deployed on Vercel](https://hackers-news-clone.vercel.app/)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 1. Clone the repository
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/saksham0712/hackers-news-clone.git
+cd hacker-news-clone
+```
 
-### `npm run eject`
+### 2. Install dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Make sure you have `Node.js` installed. If not, you can download it from [here](https://nodejs.org/).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Once you have Node.js installed, run:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 3. Start the development server
 
-## Learn More
+After installing the dependencies, start the development server with:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This will start the app on `http://localhost:3000`.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Usage
 
-### Analyzing the Bundle Size
+### Register a New User
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Navigate to the login page (if not already there).
+2. Enter a username and password.
+3. Click **Register** to store the user credentials in `localStorage`.
 
-### Making a Progressive Web App
+### Login
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. If the user is already registered, you can log in by entering the username and password.
+2. Click **Login** to authenticate and be redirected to the Home Page.
 
-### Advanced Configuration
+### Search Hacker News
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. On the Home page, you can search for Hacker News articles.
+2. The search results will be displayed below the search bar.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## File Structure
 
-### `npm run build` fails to minify
+```
+/hacker-news-clone
+  ├── /src
+      ├── /components
+          ├── LoginRegister.js    # Handles user registration and login
+          ├── Home.js             # Displays home page after login
+          ├── Search.js           # Handles the search bar
+          ├── ResultItem.js       # Displays individual search results
+      ├── App.js                  # Main app component with routing
+      ├── index.js                # Entry point for the app
+  ├── /public
+      ├── index.html              # Root HTML file
+  ├── /node_modules               # Project dependencies
+  ├── package.json                # Project metadata and dependencies
+  ├── tailwind.config.js          # Tailwind CSS configuration
+  ├── postcss.config.js           # PostCSS configuration
+  ├── README.md                   # This file
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## Key Components
+
+### 1. `LoginRegister.js`
+
+This component allows users to register and log in. It uses `localStorage` to store user credentials and check if the user is logged in.
+
+### 2. `Home.js`
+
+This page is shown to logged-in users and displays a welcome message along with the user's username. It also includes a logout button to clear the session.
+
+### 3. `Search.js`
+
+This component provides the search functionality to query Hacker News articles using the Algolia API. It allows users to search articles and displays results in a list.
+
+### 4. `ResultItem.js`
+
+This component displays individual results from the Hacker News API, including the article title, author, points, and comments.
+
+---
+
+## LocalStorage Authentication
+
+The app uses `localStorage` for simple authentication, storing usernames and passwords. The key actions are:
+
+- **Registration**: A new user is saved in `localStorage`.
+- **Login**: On successful login, the username is stored in `localStorage` to track the session.
+- **Logout**: When the user logs out, their session is cleared from `localStorage`.
+
+---
+
+## Contributing
+
+1. Fork this repository.
+2. Create a new branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to your branch (`git push origin feature/your-feature`).
+5. Open a Pull Request.
+
+
+---
+
+## Acknowledgments
+
+- **Hacker News API**: The application uses the [Hacker News API](https://hn.algolia.com/api/v1/search) for retrieving search results.
+- **Tailwind CSS**: For styling the app efficiently.
+- **React Router**: For handling navigation between different pages.
+
+---
+
+### Notes:
+
+- Update the `Demo` link with a live demo if you plan to deploy the app (e.g., via GitHub Pages, Netlify, or Vercel).
+- Make sure to replace `your-username` in the clone URL with your actual GitHub username.
+
