@@ -87,7 +87,7 @@ const LoginRegister = () => {
 
         <button
           onClick={isLogin ? handleLogin : handleRegister}
-          className="w-full p-3 bg-blue-500 text-white rounded"
+          className="w-full p-3 bg-orange-500 text-white rounded"
           disabled={loading}
         >
           {loading ? "Please wait..." : isLogin ? "Login" : "Register"}
@@ -104,7 +104,7 @@ const LoginRegister = () => {
             setUsername(""); // Clear input fields on toggle
             setPassword("");
           }}
-          className="text-blue-500 hover:underline"
+          className="text-orange-500 hover:underline"
         >
           {isLogin ? "Don't have an account? Register" : "Already have an account? Login"}
         </button>

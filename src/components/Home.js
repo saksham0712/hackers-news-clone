@@ -58,7 +58,7 @@ const App = () => {
         {loading && <p className="text-center">Loading...</p>}
         <div className="my-2 flex justify-between">
           <div></div>
-          <p className="text-sm">
+          <p className="text-sm mx-2">
             {totalResults} results ({processTime} seconds)
           </p>
         </div>
