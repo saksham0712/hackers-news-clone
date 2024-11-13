@@ -8,6 +8,7 @@ This project is a simple web application that allows users to register, log in, 
 - **Registration**: Users can register with a username and password.
 - **Login**: Registered users can log in with their username and password.
 - **Search Hacker News**: Users can search for articles from Hacker News using the Algolia API.
+- **Filtered Search**: Users can filter the search for articles from Hacker News using the Algolia API.
 - **Home Page**: After logging in, users are redirected to a home page where they can view their username.
 - **LocalStorage**: Authentication data is stored in `localStorage` to persist login state.
 - **React Router**: The app uses `react-router-dom` for page navigation.
