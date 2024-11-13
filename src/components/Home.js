@@ -11,6 +11,7 @@ const App = () => {
   const [processTime, setProcessTime] = useState("");
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("");
   const [page, setPage] = useState(0);
   const [totalpage, setTotalpage] = useState(0);
   const [user, setUser] = useState();
@@ -26,8 +27,9 @@ const App = () => {
   console.log(user);
   const searchHackerNews = async (query, page) => {
     setLoading(true);
+    const categoryFilter = category ? `&tags=${category}` : "";
     const response = await fetch(
-      `https://hn.algolia.com/api/v1/search?query=${query}&page=${page}&hitsPerPage=20`
+      `https://hn.algolia.com/api/v1/search?query=${query}${categoryFilter}&page=${page}&hitsPerPage=20`
     );
     const data = await response.json();
     console.log("this is the data", data);
@@ -41,7 +43,7 @@ const App = () => {
 
   useEffect(() => {
     searchHackerNews(query, page);
-  }, [query, page]);
+  }, [query, category, page]);
 
   // Search handler from the Search component
   const handleSearch = (query) => {
@@ -55,9 +57,22 @@ const App = () => {
         <Search user={user} onSearch={handleSearch} />
 
         {/* Loading or Results info */}
-        {loading && <p className="text-center">Loading...</p>}
         <div className="my-2 flex justify-between">
-          <div></div>
+          <div>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="mx-2 p-2 border rounded"
+            >
+              <option value="">All</option>
+              <option value="story">Story</option>
+              <option value="comment">Comment</option>
+              <option value="job">Job</option>
+              <option value="ask_hn">Ask HN</option>
+              <option value="show_hn">Show HN</option>
+            </select>
+          </div>
+        {loading && <p className="text-center">Loading...</p>}
           <p className="text-sm mx-2">
             {totalResults} results ({processTime} seconds)
           </p>

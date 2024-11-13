@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const Search = ({ user ,onSearch }) => {
   const [query, setQuery] = useState("");
+  
 
   // const handleSubmit = (e) => {
   //   e.preventDefault();
